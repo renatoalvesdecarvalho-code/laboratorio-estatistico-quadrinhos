@@ -192,6 +192,72 @@ st.caption(
     "a visualização da distribuição de frequências."
 )
 
+# ---------------------------------------------
+# ANÁLISE DE VARIÁVEL CATEGÓRICA
+# ---------------------------------------------
+
+st.subheader("Análise de Variável Categórica")
+
+colunas_categoricas = dados.select_dtypes(
+    include=["object", "string"]
+).columns.tolist()
+
+
+variavel_categorica = st.selectbox(
+    "Escolha uma variável categórica:",
+    colunas_categoricas,
+    key="variavel_categorica"
+)
+
+frequencias_categoria = (
+    dados[variavel_categorica]
+    .fillna("Não informado")
+    .value_counts()
+)
+
+st.write(
+    f"Quantidade de categorias encontradas: "
+    f"**{len(frequencias_categoria)}**"
+)
+
+st.dataframe(
+    frequencias_categoria
+    .rename("Frequência")
+    .reset_index()
+    .rename(columns={"index": variavel_categorica}),
+    use_container_width=True,
+    hide_index=True
+)
+
+st.subheader("Gráfico de Barras")
+
+# Limita o gráfico às 15 categorias mais frequentes
+frequencias_grafico = frequencias_categoria.head(15)
+
+fig_cat, ax_cat = plt.subplots()
+
+ax_cat.bar(
+    frequencias_grafico.index.astype(str),
+    frequencias_grafico.values
+)
+
+ax_cat.set_title(
+    f"Categorias mais frequentes de {variavel_categorica}"
+)
+ax_cat.set_xlabel(variavel_categorica)
+ax_cat.set_ylabel("Frequência")
+
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+
+st.pyplot(fig_cat)
+plt.close(fig_cat)
+
+st.caption(
+    "O gráfico apresenta as 15 categorias mais frequentes "
+    "da variável selecionada."
+)
+
 # --------------------------------------------------
 # HISTOGRAMA
 # --------------------------------------------------
