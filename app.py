@@ -141,6 +141,57 @@ st.write("Limite inferior:", round(limite_inferior, 2))
 st.write("Limite superior:", round(limite_superior, 2))
 st.write("Quantidade de outliers:", len(outliers))
 
+# ---------------------------------------------
+# TABELA DE FREQUÊNCIAS
+# ---------------------------------------------
+
+st.subheader("Tabela de Frequências")
+
+# Agrupamento dos dados em classes
+quantidade_classes = 10
+
+frequencias, limites_classes = np.histogram(
+    valores,
+    bins=quantidade_classes
+)
+
+total_valores = len(valores)
+
+tabela_frequencias = []
+
+for i in range(quantidade_classes):
+    limite_inferior_classe = limites_classes[i]
+    limite_superior_classe = limites_classes[i + 1]
+
+    frequencia_absoluta = int(frequencias[i])
+    frequencia_relativa = (
+        frequencia_absoluta / total_valores
+    ) * 100
+
+    tabela_frequencias.append({
+        "Classe": (
+            f"{limite_inferior_classe:.2f} "
+            f"a {limite_superior_classe:.2f}"
+        ),
+        "Frequência absoluta": frequencia_absoluta,
+        "Frequência relativa (%)": round(
+            frequencia_relativa, 2
+        )
+    })
+
+df_frequencias = pd.DataFrame(tabela_frequencias)
+
+st.dataframe(
+    df_frequencias,
+    use_container_width=True,
+    hide_index=True
+)
+
+st.caption(
+    "Os valores foram agrupados em 10 classes para facilitar "
+    "a visualização da distribuição de frequências."
+)
+
 # --------------------------------------------------
 # HISTOGRAMA
 # --------------------------------------------------
