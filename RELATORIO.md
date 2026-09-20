@@ -212,11 +212,13 @@ Ao executar os testes, todas as verificações foram concluídas com sucesso.
 
 ## 7. Estatística descritiva interativa
 
-A aplicação permite selecionar uma variável numérica do dataset.
+A aplicação permite realizar análises de variáveis numéricas e categóricas do dataset.
 
-Após a seleção, são apresentadas medidas estatísticas como média, mediana, desvio padrão, variância, mínimo, máximo e quartis.
+Para as variáveis numéricas, o usuário pode selecionar a variável desejada e visualizar medidas estatísticas como média, mediana, desvio padrão, variância, mínimo, máximo e quartis. Também é apresentada uma tabela de frequências, na qual os valores são agrupados em 10 classes, exibindo a frequência absoluta e a frequência relativa de cada intervalo.
 
-Também são apresentados gráficos para facilitar a análise da distribuição dos valores.
+A análise numérica também apresenta histograma e boxplot, além da identificação de possíveis outliers pela regra do intervalo interquartil (IQR) e uma interpretação textual automática dos resultados.
+
+Para as variáveis categóricas, a aplicação permite selecionar uma variável do dataset e apresenta uma tabela com a frequência de cada categoria. Também é gerado um gráfico de barras com as 15 categorias mais frequentes, facilitando a comparação visual entre os grupos.
 
 ### Detecção de outliers
 
@@ -235,6 +237,16 @@ Valores fora desses limites são identificados como possíveis outliers.
 Na variável `Page Count`, por exemplo, foram encontrados 4 possíveis outliers pela regra do IQR.
 
 ![Estatística descritiva](imagens/01_estatistica_descritiva.png)
+
+### Análise de variável categórica
+
+Além das variáveis numéricas, a aplicação permite analisar variáveis categóricas do dataset.
+
+Na variável `Country of Origin`, por exemplo, foram encontradas 21 categorias. As maiores frequências observadas foram Japão, com 3.575 registros, e Estados Unidos, com 3.150 registros.
+
+A aplicação apresenta a tabela de frequências das categorias e um gráfico de barras com as 15 categorias mais frequentes, permitindo comparar visualmente a distribuição dos registros entre os diferentes países de origem.
+
+![Análise de variável categórica](imagens/05_variavel_categorica.png)
 
 ---
 
